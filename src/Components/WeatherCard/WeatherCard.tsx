@@ -12,19 +12,19 @@ type PropsType = {
   onDeleteCard: (cityName: string) => void;
   onUpdateCard: (cityName: string) => void;
 };
+const directions = [
+  "Северный",
+  "Северо-Восточный",
+  "Восточный",
+  "Юго-Восточный",
+  "Южный",
+  "Юго-Западный",
+  "Западный",
+  "Северо-Западный",
+];
 const dirToStr = (d: number) => {
-  const directions = [
-    "Северный",
-    "Северо-Восточный",
-    "Восточный",
-    "Юго-Восточный",
-    "Южный",
-    "Юго-Западный",
-    "Западный",
-    "Северо-Западный",
-  ];
-  d = d < 0 ? (d = 360 - (Math.abs(d) % 360)) : d % 360;
-  return `${directions[(d / 45) | 0]}`;
+  const a = d < 0 ? (d = 360 - (Math.abs(d) % 360)) : d % 360;
+  return `${directions[(a / 45) | 0]}`;
 };
 const degreeChar = String.fromCharCode(0xfeff00b0);
 
@@ -52,8 +52,10 @@ export const WeatherCard = ({
       <div>Влажность: {humidity}%</div>
       <div>Атмосферное давление: {pressure}</div>
       <div>
-        Сила и направление ветра: {(windSpeed / 3.6).toFixed(2)}М/С -
-        {`${windDeg}${degreeChar} = ${dirToStr(windDeg)}`}
+        Сила и направление ветра:
+        {` ${(windSpeed / 3.6).toFixed(
+          2
+        )}М/С -${windDeg}${degreeChar} = ${dirToStr(windDeg)}`}
         <span
           className={s.arrow}
           style={{ transform: `rotate(${windDeg - 90}deg)` }}
