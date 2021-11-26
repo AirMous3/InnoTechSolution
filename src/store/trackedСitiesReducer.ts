@@ -9,6 +9,8 @@ export const trackedCitesReducer = (
   switch (action.type) {
     case "TRACKED_CITIES/ADD-CITY":
       return [action.city, ...state];
+    case "TRACKED_CITIES/SET-CITIES-FROM-LS":
+      return action.cities;
     default:
       return state;
   }
@@ -16,6 +18,8 @@ export const trackedCitesReducer = (
 //AC
 export const addCity = (city: oneCityPreview) =>
   ({ type: "TRACKED_CITIES/ADD-CITY", city } as const);
+export const setCitiesFromLS = (cities: oneCityPreview[]) =>
+  ({ type: "TRACKED_CITIES/SET-CITIES-FROM-LS", cities } as const);
 
 // THUNK
 export const getCityThunk =
@@ -52,4 +56,6 @@ type oneCityPreview = {
   };
 };
 type InitStateType = oneCityPreview[];
-type ActionTypes = ReturnType<typeof addCity>;
+type ActionTypes =
+  | ReturnType<typeof addCity>
+  | ReturnType<typeof setCitiesFromLS>;

@@ -1,17 +1,27 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { WeatherCard } from "./Components/WeatherCard/WeatherCard";
 import s from "./App.module.css";
 import { EditableSelect } from "./Components/Select/Select";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { AppRootStateType } from "./store/store";
+import { setCitiesFromLS } from "./store/trackedСitiesReducer";
 
 export const App = () => {
+  const dispatch = useDispatch();
   const findedCities = useSelector(
     (state: AppRootStateType) => state.searchCities
   );
   const trackedCities = useSelector(
     (state: AppRootStateType) => state.trackedCities
   );
+  useEffect(() => {
+    dispatch(setCitiesFromLS(JSON.parse(localStorage.getItem("weather")!)));
+  }, [dispatch]);
+
+  useEffect(() => {
+    localStorage.setItem("weather", JSON.stringify(trackedCities));
+  }, [trackedCities]);
+
   return (
     <div className={s.main}>
       <div style={{ margin: "0 auto" }}>
