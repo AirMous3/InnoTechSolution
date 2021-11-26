@@ -8,6 +8,7 @@ type PropsType = {
   windDeg: number;
   cityName: string;
   lastUpdate: string;
+  onDeleteCard: (cityName: string) => void;
 };
 const dirToStr = (d: number) => {
   const directions = [
@@ -33,6 +34,7 @@ export const WeatherCard = ({
   windDeg,
   windSpeed,
   humidity,
+  onDeleteCard,
 }: PropsType) => {
   return (
     <div className={s.main}>
@@ -48,7 +50,7 @@ export const WeatherCard = ({
       </div>
       <div>Последнее обновление данных: {lastUpdate}</div>
       <div>
-        <button>Удалить</button>
+        <button onClick={() => onDeleteCard(cityName)}>Удалить</button>
         <button>Обновить</button>
       </div>
     </div>

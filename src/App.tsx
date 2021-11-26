@@ -4,7 +4,7 @@ import s from "./App.module.css";
 import { EditableSelect } from "./Components/Select/Select";
 import { useDispatch, useSelector } from "react-redux";
 import { AppRootStateType } from "./store/store";
-import { setCitiesFromLS } from "./store/trackedСitiesReducer";
+import { removeCity, setCitiesFromLS } from "./store/trackedСitiesReducer";
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -14,6 +14,9 @@ export const App = () => {
   const trackedCities = useSelector(
     (state: AppRootStateType) => state.trackedCities
   );
+  const handleDeleteCard = (cityName: string) => {
+    dispatch(removeCity(cityName));
+  };
   useEffect(() => {
     dispatch(setCitiesFromLS(JSON.parse(localStorage.getItem("weather")!)));
   }, [dispatch]);
@@ -37,6 +40,7 @@ export const App = () => {
             windSpeed={c.current.wind_kph}
             cityName={c.location.name}
             lastUpdate={c.current.last_updated}
+            onDeleteCard={handleDeleteCard}
           />
         ))}
       </div>
