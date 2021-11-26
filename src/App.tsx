@@ -25,7 +25,11 @@ export const App = () => {
     dispatch(updateCity(cityName));
   };
   useEffect(() => {
-    dispatch(setCitiesFromLS(JSON.parse(localStorage.getItem("weather")!)));
+    if (!localStorage.getItem("weather")) {
+      dispatch(setCitiesFromLS([]));
+    } else {
+      dispatch(setCitiesFromLS(JSON.parse(localStorage.getItem("weather")!)));
+    }
   }, [dispatch]);
 
   useEffect(() => {

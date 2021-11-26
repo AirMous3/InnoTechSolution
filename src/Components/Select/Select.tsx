@@ -20,15 +20,18 @@ export const EditableSelect = ({ cities }: PropsType) => {
       {c.name}
     </Select.Option>
   ));
+
   const handleOnSearch = (e: string) => {
     setTitle(e);
     if (title.length < 3) return;
     dispatch(getCities(title));
   };
+
   const handleOnChange = (value: string) => {
     dispatch(getCityThunk(value));
     setTitle("");
   };
+
   return (
     <Select
       style={{

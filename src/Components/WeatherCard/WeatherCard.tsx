@@ -49,7 +49,7 @@ export const WeatherCard = ({
         Температура: {temperature}°C
         <img src={icon} alt="icon" />
       </div>
-      <div>Влажность: {humidity}</div>
+      <div>Влажность: {humidity}%</div>
       <div>Атмосферное давление: {pressure}</div>
       <div>
         Сила и направление ветра: {(windSpeed / 3.6).toFixed(2)}М/С -
