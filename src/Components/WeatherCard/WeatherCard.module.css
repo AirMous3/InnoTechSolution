@@ -4,5 +4,22 @@
     padding: 20px;
     border-radius: 5px;
     text-align: center;
-    margin: 0 auto;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-bottom: 20px;
+}
+
+.main div {
+    margin-top: 10px;
+}
+
+.main button {
+    color: white;
+    border: none;
+    border-radius: 4px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+.main button:active {
+    transform: scale(0.95);
 }

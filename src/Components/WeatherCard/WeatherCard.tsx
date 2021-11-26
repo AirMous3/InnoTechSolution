@@ -9,6 +9,7 @@ type PropsType = {
   cityName: string;
   lastUpdate: string;
   onDeleteCard: (cityName: string) => void;
+  onUpdateCard: (cityName: string) => void;
 };
 const dirToStr = (d: number) => {
   const directions = [
@@ -35,6 +36,7 @@ export const WeatherCard = ({
   windSpeed,
   humidity,
   onDeleteCard,
+  onUpdateCard,
 }: PropsType) => {
   return (
     <div className={s.main}>
@@ -50,8 +52,24 @@ export const WeatherCard = ({
       </div>
       <div>Последнее обновление данных: {lastUpdate}</div>
       <div>
-        <button onClick={() => onDeleteCard(cityName)}>Удалить</button>
-        <button>Обновить</button>
+        <button
+          style={{
+            backgroundColor: "#f15555",
+          }}
+          onClick={() => onDeleteCard(cityName)}
+        >
+          Удалить
+        </button>
+
+        <button
+          style={{
+            backgroundColor: "#4aae4a",
+            marginLeft: "20px",
+          }}
+          onClick={() => onUpdateCard(cityName)}
+        >
+          Обновить
+        </button>
       </div>
     </div>
   );

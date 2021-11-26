@@ -13,6 +13,10 @@ export const trackedCitesReducer = (
       return action.cities;
     case "TRACKED_CITIES/REMOVE-CITY":
       return state.filter((c) => c.location.name !== action.cityName);
+    case "TRACKED_CITIES/UPDATE-CITY-WEATHER":
+      return state.map((c) =>
+        c.location.name === action.city.location.name ? action.city : c
+      );
     default:
       return state;
   }
@@ -24,6 +28,8 @@ export const setCitiesFromLS = (cities: oneCityPreview[]) =>
   ({ type: "TRACKED_CITIES/SET-CITIES-FROM-LS", cities } as const);
 export const removeCity = (cityName: string) =>
   ({ type: "TRACKED_CITIES/REMOVE-CITY", cityName } as const);
+export const updateCityWeather = (city: oneCityPreview) =>
+  ({ type: "TRACKED_CITIES/UPDATE-CITY-WEATHER", city } as const);
 
 // THUNK
 export const getCityThunk =
@@ -31,6 +37,10 @@ export const getCityThunk =
     const res = await api.getCityWeather(cityName);
     dispatch(addCity(res.data));
   };
+export const updateCity = (cityName: string) => async (dispatch: Dispatch) => {
+  const res = await api.getCityWeather(cityName);
+  dispatch(updateCityWeather(res.data));
+};
 
 /// TYPES
 type oneCityPreview = {
@@ -63,4 +73,5 @@ type InitStateType = oneCityPreview[];
 type ActionTypes =
   | ReturnType<typeof addCity>
   | ReturnType<typeof setCitiesFromLS>
-  | ReturnType<typeof removeCity>;
+  | ReturnType<typeof removeCity>
+  | ReturnType<typeof updateCityWeather>;
