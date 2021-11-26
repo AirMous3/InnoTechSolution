@@ -42,8 +42,9 @@ export const App = () => {
         <EditableSelect cities={findedCities} />
       </div>
       <div className={s.cardWrapper}>
-        {trackedCities.map((c) => (
+        {trackedCities.map((c, index) => (
           <WeatherCard
+            key={index}
             temperature={c.current.temp_c}
             humidity={c.current.humidity}
             pressure={c.current.pressure_mb}
