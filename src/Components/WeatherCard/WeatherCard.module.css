@@ -13,6 +13,11 @@
     margin-top: 10px;
 }
 
+.main img {
+    max-width: 35px;
+    margin-left: 10px;
+}
+
 .main button {
     color: white;
     border: none;
@@ -22,4 +27,11 @@
 
 .main button:active {
     transform: scale(0.95);
+}
+
+.arrow {
+    font-size: 25px;
+    margin-left: 5px;
+    color: red;
+    display: inline-block;
 }

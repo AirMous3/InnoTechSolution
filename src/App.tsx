@@ -47,6 +47,7 @@ export const App = () => {
             windSpeed={c.current.wind_kph}
             cityName={c.location.name}
             lastUpdate={c.current.last_updated}
+            icon={c.current.condition.icon}
             onDeleteCard={handleDeleteCard}
             onUpdateCard={handleUpdateCard}
           />

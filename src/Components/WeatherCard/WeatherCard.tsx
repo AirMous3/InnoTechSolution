@@ -8,6 +8,7 @@ type PropsType = {
   windDeg: number;
   cityName: string;
   lastUpdate: string;
+  icon: string;
   onDeleteCard: (cityName: string) => void;
   onUpdateCard: (cityName: string) => void;
 };
@@ -37,18 +38,28 @@ export const WeatherCard = ({
   humidity,
   onDeleteCard,
   onUpdateCard,
+  icon,
 }: PropsType) => {
   return (
     <div className={s.main}>
       <b>
         <div>Город: {cityName}</div>
       </b>
-      <div>Температура: {temperature}</div>
+      <div>
+        Температура: {temperature}°C
+        <img src={icon} alt="icon" />
+      </div>
       <div>Влажность: {humidity}</div>
       <div>Атмосферное давление: {pressure}</div>
       <div>
         Сила и направление ветра: {(windSpeed / 3.6).toFixed(2)}М/С -
         {`${windDeg}${degreeChar} = ${dirToStr(windDeg)}`}
+        <span
+          className={s.arrow}
+          style={{ transform: `rotate(${windDeg - 90}deg)` }}
+        >
+          ➵
+        </span>
       </div>
       <div>Последнее обновление данных: {lastUpdate}</div>
       <div>
