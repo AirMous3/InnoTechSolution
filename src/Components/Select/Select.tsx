@@ -3,6 +3,7 @@ import { Select } from "antd";
 import "antd/dist/antd.css";
 import { useDispatch } from "react-redux";
 import { getCities } from "../../store/searchCitiesReducer";
+import { getCityThunk } from "../../store/trackedСitiesReducer";
 
 type PropsType = {
   cities: {
@@ -24,6 +25,10 @@ export const EditableSelect = ({ cities }: PropsType) => {
     if (title.length < 3) return;
     dispatch(getCities(title));
   };
+  const handleOnChange = (value: string) => {
+    dispatch(getCityThunk(value));
+    setTitle("");
+  };
   return (
     <Select
       style={{
@@ -34,6 +39,7 @@ export const EditableSelect = ({ cities }: PropsType) => {
       showSearch
       value={title}
       onSearch={handleOnSearch}
+      onChange={handleOnChange}
       filterOption={false}
     >
       {optionsCities}
