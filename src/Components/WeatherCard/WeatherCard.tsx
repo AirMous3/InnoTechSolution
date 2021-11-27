@@ -23,10 +23,15 @@ const directions = [
   "Северо-Западный",
 ];
 const dirToStr = (d: number) => {
-  const a = d < 0 ? (d = 360 - (Math.abs(d) % 360)) : d % 360;
+  const a = d < 0 ? 360 - (Math.abs(d) % 360) : d % 360;
   return `${directions[(a / 45) | 0]}`;
 };
 const degreeChar = String.fromCharCode(0xfeff00b0);
+const dateFormatter = new Intl.DateTimeFormat("ru-RU", {
+  day: "numeric",
+  month: "long",
+  year: "numeric",
+});
 
 export const WeatherCard = ({
   lastUpdate,
@@ -63,7 +68,9 @@ export const WeatherCard = ({
           ➵
         </span>
       </div>
-      <div>Последнее обновление данных: {lastUpdate}</div>
+      <div>
+        Последнее обновление данных: {dateFormatter.format(Date.parse(lastUpdate))}
+      </div>
       <div>
         <button
           style={{
