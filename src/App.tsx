@@ -12,7 +12,7 @@ import {
 
 export const App = () => {
   const dispatch = useDispatch();
-  const findedCities = useSelector(
+  const searchCities = useSelector(
     (state: AppRootStateType) => state.searchCities
   );
   const trackedCities = useSelector(
@@ -25,11 +25,8 @@ export const App = () => {
     dispatch(updateCity(cityName));
   };
   useEffect(() => {
-    if (!localStorage.getItem("weather")) {
-      dispatch(setCitiesFromLS([]));
-    } else {
-      dispatch(setCitiesFromLS(JSON.parse(localStorage.getItem("weather")!)));
-    }
+    const weather = localStorage.getItem("weather");
+    dispatch(setCitiesFromLS(weather ? JSON.parse(weather) : []));
   }, [dispatch]);
 
   useEffect(() => {
@@ -39,7 +36,7 @@ export const App = () => {
   return (
     <div className={s.main}>
       <div style={{ margin: "0 auto" }}>
-        <EditableSelect cities={findedCities} />
+        <EditableSelect cities={searchCities} />
       </div>
       <div className={s.cardWrapper}>
         {trackedCities.map((c, index) => (

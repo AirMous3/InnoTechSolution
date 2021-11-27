@@ -32,7 +32,7 @@ export const updateCityWeather = (city: oneCityPreview) =>
   ({ type: "TRACKED_CITIES/UPDATE-CITY-WEATHER", city } as const);
 
 // THUNK
-export const getCityThunk =
+export const getCity =
   (cityName: string) => async (dispatch: Dispatch) => {
     const res = await api.getCityWeather(cityName);
     dispatch(addCity(res.data));
