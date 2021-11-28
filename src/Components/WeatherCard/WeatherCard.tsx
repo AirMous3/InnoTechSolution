@@ -31,6 +31,9 @@ const dateFormatter = new Intl.DateTimeFormat("ru-RU", {
   day: "numeric",
   month: "long",
   year: "numeric",
+  hour: "numeric",
+  minute: "numeric",
+  second: "numeric",
 });
 
 export const WeatherCard = ({
@@ -69,7 +72,8 @@ export const WeatherCard = ({
         </span>
       </div>
       <div>
-        Последнее обновление данных: {dateFormatter.format(Date.parse(lastUpdate))}
+        Последнее обновление данных:{" "}
+        {dateFormatter.format(Date.parse(lastUpdate))}
       </div>
       <div>
         <button
