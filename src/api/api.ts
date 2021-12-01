@@ -1,14 +1,14 @@
-import axios from "axios";
+import axios from 'axios';
 
 export const api = {
   getCities(cityName: string) {
     return axios.get<ResponseCitiesType[]>(
-      `http://api.weatherapi.com/v1/search.json?key=${process.env.REACT_APP_MY_API_KEY}&q=${cityName}`
+      `http://api.weatherapi.com/v1/search.json?key=${process.env.REACT_APP_MY_API_KEY}&q=${cityName}`,
     );
   },
   getCityWeather(cityName: string) {
     return axios.get<ResponseCityType>(
-      `http://api.weatherapi.com/v1/current.json?key=${process.env.REACT_APP_MY_API_KEY}&q=${cityName}`
+      `http://api.weatherapi.com/v1/current.json?key=${process.env.REACT_APP_MY_API_KEY}&q=${cityName}`,
     );
   },
 };

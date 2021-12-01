@@ -1,42 +1,42 @@
-import { Dispatch } from "redux";
-import { api } from "../api/api";
+import { Dispatch } from 'redux';
+
+import { api } from '../api/api';
 
 const initState: InitStateType = [];
 export const trackedCitesReducer = (
   state = initState,
-  action: ActionTypes
+  action: ActionTypes,
 ): InitStateType => {
   switch (action.type) {
-    case "TRACKED_CITIES/ADD-CITY":
+    case 'TRACKED_CITIES/ADD-CITY':
       return [action.city, ...state];
-    case "TRACKED_CITIES/SET-CITIES-FROM-LS":
+    case 'TRACKED_CITIES/SET-CITIES-FROM-LS':
       return action.cities;
-    case "TRACKED_CITIES/REMOVE-CITY":
-      return state.filter((c) => c.location.name !== action.cityName);
-    case "TRACKED_CITIES/UPDATE-CITY-WEATHER":
-      return state.map((c) =>
-        c.location.name === action.city.location.name ? action.city : c
+    case 'TRACKED_CITIES/REMOVE-CITY':
+      return state.filter(c => c.location.name !== action.cityName);
+    case 'TRACKED_CITIES/UPDATE-CITY-WEATHER':
+      return state.map(c =>
+        c.location.name === action.city.location.name ? action.city : c,
       );
     default:
       return state;
   }
 };
-//AC
+// AC
 export const addCity = (city: oneCityPreview) =>
-  ({ type: "TRACKED_CITIES/ADD-CITY", city } as const);
+  ({ type: 'TRACKED_CITIES/ADD-CITY', city } as const);
 export const setCitiesFromLS = (cities: oneCityPreview[]) =>
-  ({ type: "TRACKED_CITIES/SET-CITIES-FROM-LS", cities } as const);
+  ({ type: 'TRACKED_CITIES/SET-CITIES-FROM-LS', cities } as const);
 export const removeCity = (cityName: string) =>
-  ({ type: "TRACKED_CITIES/REMOVE-CITY", cityName } as const);
+  ({ type: 'TRACKED_CITIES/REMOVE-CITY', cityName } as const);
 export const updateCityWeather = (city: oneCityPreview) =>
-  ({ type: "TRACKED_CITIES/UPDATE-CITY-WEATHER", city } as const);
+  ({ type: 'TRACKED_CITIES/UPDATE-CITY-WEATHER', city } as const);
 
 // THUNK
-export const getCity =
-  (cityName: string) => async (dispatch: Dispatch) => {
-    const res = await api.getCityWeather(cityName);
-    dispatch(addCity(res.data));
-  };
+export const getCity = (cityName: string) => async (dispatch: Dispatch) => {
+  const res = await api.getCityWeather(cityName);
+  dispatch(addCity(res.data));
+};
 export const updateCity = (cityName: string) => async (dispatch: Dispatch) => {
   const res = await api.getCityWeather(cityName);
   dispatch(updateCityWeather(res.data));

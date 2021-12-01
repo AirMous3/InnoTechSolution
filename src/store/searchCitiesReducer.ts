@@ -1,13 +1,14 @@
-import { Dispatch } from "redux";
-import { api } from "../api/api";
+import { Dispatch } from 'redux';
+
+import { api } from '../api/api';
 
 const initState: InitStateType = [];
 export const searchCitiesReducer = (
   state = initState,
-  action: ActionTypes
+  action: ActionTypes,
 ): InitStateType => {
   switch (action.type) {
-    case "SEARCH-CITIES/SET-CITIES":
+    case 'SEARCH-CITIES/SET-CITIES':
       return action.citiesList;
     default:
       return state;
@@ -15,14 +16,12 @@ export const searchCitiesReducer = (
 };
 /// AC
 export const setCities = (citiesList: oneCityPreview[]) =>
-  ({ type: "SEARCH-CITIES/SET-CITIES", citiesList } as const);
+  ({ type: 'SEARCH-CITIES/SET-CITIES', citiesList } as const);
 
 /// THUNK
 export const getCities = (cityName: string) => async (dispatch: Dispatch) => {
-  try {
-    const res = await api.getCities(cityName);
-    dispatch(setCities(res.data));
-  } catch (e) {}
+  const res = await api.getCities(cityName);
+  dispatch(setCities(res.data));
 };
 /// TYPES
 type oneCityPreview = {

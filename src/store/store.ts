@@ -1,7 +1,8 @@
-import { applyMiddleware, combineReducers, createStore } from "redux";
-import thunk from "redux-thunk";
-import { searchCitiesReducer } from "./searchCitiesReducer";
-import { trackedCitesReducer } from "./trackedСitiesReducer";
+import { applyMiddleware, combineReducers, createStore } from 'redux';
+import thunk from 'redux-thunk';
+
+import { searchCitiesReducer } from './searchCitiesReducer';
+import { trackedCitesReducer } from './trackedСitiesReducer';
 
 const RootReducer = combineReducers({
   searchCities: searchCitiesReducer,

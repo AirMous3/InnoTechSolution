@@ -1,5 +1,8 @@
-import s from "./WeatherCard.module.css";
-import { getPowerAndDirectionWind } from "../../utils/getPowerAndDirectionWind";
+import { ReactElement } from 'react';
+
+import { getPowerAndDirectionWind } from '../../utils/getPowerAndDirectionWind';
+
+import s from './WeatherCard.module.css';
 
 type PropsType = {
   temperature: number;
@@ -14,15 +17,15 @@ type PropsType = {
   onUpdateCard: (cityName: string) => void;
 };
 
-const dateFormatter = new Intl.DateTimeFormat("ru-RU", {
-  day: "numeric",
-  month: "long",
-  year: "numeric",
-  hour: "numeric",
-  minute: "numeric",
-  second: "numeric",
+const dateFormatter = new Intl.DateTimeFormat('ru-RU', {
+  day: 'numeric',
+  month: 'long',
+  year: 'numeric',
+  hour: 'numeric',
+  minute: 'numeric',
+  second: 'numeric',
 });
-
+const RIGHT_ANGLE = 90;
 export const WeatherCard = ({
   lastUpdate,
   cityName,
@@ -34,7 +37,7 @@ export const WeatherCard = ({
   onDeleteCard,
   onUpdateCard,
   icon,
-}: PropsType) => {
+}: PropsType): ReactElement => {
   const formattedTime = dateFormatter.format(Date.parse(lastUpdate));
   return (
     <div className={s.main}>
@@ -52,7 +55,7 @@ export const WeatherCard = ({
         {getPowerAndDirectionWind(windSpeed, windDeg)}
         <span
           className={s.arrow}
-          style={{ transform: `rotate(${windDeg - 90}deg)` }}
+          style={{ transform: `rotate(${windDeg - RIGHT_ANGLE}deg)` }}
         >
           ➵
         </span>
@@ -60,8 +63,9 @@ export const WeatherCard = ({
       <div>Последнее обновление данных: {formattedTime}</div>
       <div>
         <button
+          type="button"
           style={{
-            backgroundColor: "#f15555",
+            backgroundColor: '#f15555',
           }}
           onClick={() => onDeleteCard(cityName)}
         >
@@ -69,9 +73,10 @@ export const WeatherCard = ({
         </button>
 
         <button
+          type="button"
           style={{
-            backgroundColor: "#4aae4a",
-            marginLeft: "20px",
+            backgroundColor: '#4aae4a',
+            marginLeft: '20px',
           }}
           onClick={() => onUpdateCard(cityName)}
         >
