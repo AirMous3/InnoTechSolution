@@ -4,6 +4,7 @@ import "antd/dist/antd.css";
 import { useDispatch } from "react-redux";
 import { getCities } from "../../store/searchCitiesReducer";
 import { getCity } from "../../store/trackedСitiesReducer";
+import {EMPTY_STRING} from "../../constants/defaultValues";
 
 type PropsType = {
   cities: {
@@ -13,7 +14,7 @@ type PropsType = {
 };
 export const EditableSelect = ({ cities }: PropsType) => {
   const dispatch = useDispatch();
-  const [title, setTitle] = useState<string>("");
+  const [title, setTitle] = useState<string>(EMPTY_STRING);
 
   const optionsCities = cities.map((c) => (
     <Select.Option key={c.id} value={c.name}>

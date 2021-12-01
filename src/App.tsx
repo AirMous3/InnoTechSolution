@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import { WeatherCard } from "./Components/WeatherCard/WeatherCard";
+import { WeatherCard } from "./components/weatherCard/WeatherCard";
 import s from "./App.module.css";
-import { EditableSelect } from "./Components/Select/Select";
+import { EditableSelect } from "./components/select/Select";
 import { useDispatch, useSelector } from "react-redux";
 import { AppRootStateType } from "./store/store";
 import {

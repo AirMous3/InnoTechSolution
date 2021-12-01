@@ -1,4 +1,5 @@
 import s from "./WeatherCard.module.css";
+import { getPowerAndDirectionWind } from "../../utils/getPowerAndDirectionWind";
 
 type PropsType = {
   temperature: number;
@@ -12,21 +13,7 @@ type PropsType = {
   onDeleteCard: (cityName: string) => void;
   onUpdateCard: (cityName: string) => void;
 };
-const directions = [
-  "Северный",
-  "Северо-Восточный",
-  "Восточный",
-  "Юго-Восточный",
-  "Южный",
-  "Юго-Западный",
-  "Западный",
-  "Северо-Западный",
-];
-const dirToStr = (d: number) => {
-  const a = d < 0 ? 360 - (Math.abs(d) % 360) : d % 360;
-  return `${directions[(a / 45) | 0]}`;
-};
-const degreeChar = String.fromCharCode(0xfeff00b0);
+
 const dateFormatter = new Intl.DateTimeFormat("ru-RU", {
   day: "numeric",
   month: "long",
@@ -48,6 +35,7 @@ export const WeatherCard = ({
   onUpdateCard,
   icon,
 }: PropsType) => {
+  const formattedTime = dateFormatter.format(Date.parse(lastUpdate));
   return (
     <div className={s.main}>
       <b>
@@ -61,9 +49,7 @@ export const WeatherCard = ({
       <div>Атмосферное давление: {pressure}</div>
       <div>
         Сила и направление ветра:
-        {` ${(windSpeed / 3.6).toFixed(
-          2
-        )}М/С -${windDeg}${degreeChar} = ${dirToStr(windDeg)}`}
+        {getPowerAndDirectionWind(windSpeed, windDeg)}
         <span
           className={s.arrow}
           style={{ transform: `rotate(${windDeg - 90}deg)` }}
@@ -71,10 +57,7 @@ export const WeatherCard = ({
           ➵
         </span>
       </div>
-      <div>
-        Последнее обновление данных:{" "}
-        {dateFormatter.format(Date.parse(lastUpdate))}
-      </div>
+      <div>Последнее обновление данных: {formattedTime}</div>
       <div>
         <button
           style={{
